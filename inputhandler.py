@@ -7,10 +7,12 @@ from tkinter import filedialog, messagebox, scrolledtext
 from day2 import day2
 from day2_2 import day2_2
 from day3 import day3
+from day3_2 import day3_2
+from day4 import day4
 
 def process_input(text: str):
    # day = day2
-   print(day3.solve(text))
+   print(day4.solve(text))
 
 def load_file_into_text(widget: scrolledtext.ScrolledText):
    path = filedialog.askopenfilename(title="Open input file")
