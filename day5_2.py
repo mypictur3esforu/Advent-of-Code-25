@@ -7,6 +7,7 @@ class day5_2:
       rules = [rule.split("-") for rule in rules]
       rules = [[int(num) for num in rule] for rule in rules]
       rules.sort()
+      # ein letztes Element muss dahin, da sonst die letzte Regel nicht ausgeführt wird (nur wenn die letzte Regel eine neue Kette aufmacht)
       rules.append([0, 0])
 
       ans = 0
