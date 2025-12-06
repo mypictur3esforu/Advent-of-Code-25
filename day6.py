@@ -1,4 +1,3 @@
-import re
 class day6:
 
    def solve(input: str):
