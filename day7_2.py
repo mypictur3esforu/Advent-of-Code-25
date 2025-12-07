@@ -1,38 +1,34 @@
+from functools import lru_cache
 class day7_2:
+   lines = "" 
+
+   @staticmethod
    def solve(input:str):
-      lines = input.split("\n")
-      beam = [not False for char in lines[0]]
-      for line in lines:
-         for i in range(len(line)):
-            if line[i] == "S": beam[i] = True
-      return day7_2.backtracking(lines[1:], beam, "")
+      day7_2.lines = input.split("\n")
+      day7_2.lines.pop()
+      lines = day7_2.lines
+
+      for y in range(len(lines[0])):
+         if lines[0][y] == "S": 
+            return day7_2.memoization((0, y))
    
-   def backtracking(lines, beam, check):
-      for b in beam:
-         if b: check += "|"
-         else: check += "."
-      check+= "\n"
-      if len(check.split("\n")) == 8: print(check)
+   @lru_cache(maxsize=1000)
+   @staticmethod
+   def memoization(cord):
+      x, y = cord
+      # print(cord)
+      if(cord == (14,0)):
+         print("Maaan")
+      lines = day7_2.lines
+
+      if lines[x][y] == "^": return 0
+      elif x == len(lines)-1: return 1
+
       ans = 0
-      # Suchen, ob es einen betrachbaren Strahl gibt und wo der ist (betrachtbar erst wenn er sich splitted, ansonsten geht er einfach weiter)
-      for line in lines:
-         i = -1
-         for z in range(len(line)):
-            if line[z] == "^" and beam[z] == True: i = z
-         if i != -1: break
-         lines=lines[1:]
-      else: 
-         return 1
+      for z in range(x, len(lines)):
+         if lines[z][y] != "^": continue
 
-      # wird nur bei Strahl der sich splitted ausgeführt
-      beam[i] = False
-      if i-1 >= 0:
-         beam[i-1] = True
-         ans += day7_2.backtracking(lines[1:], beam, check)
-      if i+1 < len(line):
-         beam[i] = False
-         beam[i-1] = False
-         beam[i+1] = True
-         ans+= day7_2.backtracking(lines[1:], beam, check)
-
-      return ans      
+         if y > 0: ans += day7_2.memoization((z, y-1))
+         if y < len(lines[z])-1: ans += day7_2.memoization((z, y+1))
+         return ans
+      return 1
