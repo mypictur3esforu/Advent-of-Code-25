@@ -1,13 +1,12 @@
 class day7_2:
    def solve(input:str):
       lines = input.split("\n")
-      beam = [False for char in lines[0]]
+      beam = [not False for char in lines[0]]
       for line in lines:
          for i in range(len(line)):
             if line[i] == "S": beam[i] = True
       return day7_2.backtracking(lines[1:], beam, "")
    
-   # global ans
    def backtracking(lines, beam, check):
       for b in beam:
          if b: check += "|"
