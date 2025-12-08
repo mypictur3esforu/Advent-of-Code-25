@@ -16,10 +16,11 @@ from day6 import day6
 from day6_2 import day6_2
 from day7 import day7
 from day7_2 import day7_2
+from day8 import day8
 
 def process_input(text: str):
    # day = day2
-   print(day7_2.solve(text))
+   print(day8.solve(text))
 
 def load_file_into_text(widget: scrolledtext.ScrolledText):
    path = filedialog.askopenfilename(title="Open input file")
